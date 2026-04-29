@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Library Vault</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="Library navigation">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">LV</div>
+          <div>
+            <h1>Library Vault</h1>
+            <p>Audio and PDF storage</p>
+          </div>
+        </div>
+
+        <nav class="nav-tabs" aria-label="Collection type">
+          <button class="nav-tab active" type="button" data-filter="all">
+            <span aria-hidden="true">▦</span>
+            All files
+          </button>
+          <button class="nav-tab" type="button" data-filter="audio">
+            <span aria-hidden="true">♪</span>
+            Audios
+          </button>
+          <button class="nav-tab" type="button" data-filter="pdf">
+            <span aria-hidden="true">▤</span>
+            Books PDF
+          </button>
+        </nav>
+
+        <section class="storage-panel" aria-labelledby="storage-title">
+          <div class="section-label" id="storage-title">Storage</div>
+          <div class="meter" aria-hidden="true">
+            <div class="meter-fill" id="storageFill"></div>
+          </div>
+          <p id="storageText">Calculating local storage...</p>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Personal collection</p>
+            <h2>Your saved media</h2>
+          </div>
+          <label class="upload-button" for="fileInput">
+            <span aria-hidden="true">＋</span>
+            Add audio or PDF
+          </label>
+          <input id="fileInput" type="file" accept="audio/*,.pdf,application/pdf" multiple>
+        </header>
+
+        <section class="controls" aria-label="Library controls">
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input id="searchInput" type="search" placeholder="Search title, file type, notes...">
+          </label>
+          <select id="sortSelect" aria-label="Sort files">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="name">Name A-Z</option>
+            <option value="size">Largest first</option>
+          </select>
+        </section>
+
+        <section class="drop-zone" id="dropZone">
+          <div>
+            <strong>Drop files here</strong>
+            <span>MP3, WAV, M4A, FLAC, OGG, and PDF files are saved in this browser.</span>
+          </div>
+        </section>
+
+        <section class="summary-grid" aria-label="Library summary">
+          <article>
+            <span id="totalCount">0</span>
+            <p>Total files</p>
+          </article>
+          <article>
+            <span id="audioCount">0</span>
+            <p>Audios</p>
+          </article>
+          <article>
+            <span id="pdfCount">0</span>
+            <p>PDF books</p>
+          </article>
+          <article>
+            <span id="totalSize">0 MB</span>
+            <p>Saved size</p>
+          </article>
+        </section>
+
+        <section class="library-section" aria-live="polite">
+          <div class="section-heading">
+            <h3 id="listTitle">All files</h3>
+            <button class="ghost-button" type="button" id="clearSearch">Clear search</button>
+          </div>
+          <div class="library-grid" id="libraryGrid"></div>
+          <div class="empty-state" id="emptyState">
+            <div aria-hidden="true">▣</div>
+            <h3>No files saved yet</h3>
+            <p>Add your first audio or PDF to start building the library.</p>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <dialog class="details-dialog" id="detailsDialog">
+      <form method="dialog" class="dialog-card">
+        <button class="icon-close" value="cancel" aria-label="Close details">×</button>
+        <div id="detailsContent"></div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
